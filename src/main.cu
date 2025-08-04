@@ -51,10 +51,10 @@ __device__ uint64_t device_memory[2 + OUTPUT_BUFFER_SIZE * 3];
 
 __device__ int count_zero_bytes(uint32_t x) {
     int n = 0;
-    n += ((x & 0xFF) <= 0x11);
-    n += (((x >> 8) & 0xFF) <= 0x11);
-    n += (((x >> 16) & 0xFF) <= 0x11);
-    n += (((x >> 24) & 0xFF) <= 0x11);
+    n += ((x & 0xFF) == 0x00 || (x & 0xFF) == 0x01 || (x & 0xFF) == 0x10 || (x & 0xFF) == 0x11);
+    n += (((x >> 8) & 0xFF) == 0x00 || ((x >> 8) & 0xFF) == 0x01 || ((x >> 8) & 0xFF) == 0x10 || ((x >> 8) & 0xFF) == 0x11);
+    n += (((x >> 16) & 0xFF) == 0x00 || ((x >> 16) & 0xFF) == 0x01 || ((x >> 16) & 0xFF) == 0x10 || ((x >> 16) & 0xFF) == 0x11);
+    n += (((x >> 24) & 0xFF) == 0x00 || ((x >> 24) & 0xFF) == 0x01 || ((x >> 24) & 0xFF) == 0x10 || ((x >> 24) & 0xFF) == 0x11);
     return n;
 }
 
